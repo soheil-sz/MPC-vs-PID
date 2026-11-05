@@ -22,11 +22,11 @@ Next, the FCS-MPC controller was built. The controller switches the output betwe
 THe FCS MPC controller successfully controls the motor current by modulating the voltage, which allows the motor to reach the desired speed. 
 However, we can see significant current ripple that wasn't present for the PID cascade. This is because the MPC controller is switching a H-Bridge, while the PID cascade is feeding the motor an ideal analog voltage source.
 
-## 3. Switching PID
+## 4. Switching PID
 
 To make the comparison fair, a PWM modulator was implemented after PID cascade. The PWM modulator follows the principle of carrier wave PWM, and has a modulating frequency of 5 kHz. The MPC runs at 10 kHz. Below is the plot of the PID cascade response with PWM switching included in the model. 
 
-![Switching PID response](./images/response_switch.png) 
+![Switching PID response](./images/pid_response_switch.png) 
 
 Now that both models include switching dynamics, we can compare the 2 controllers with a step response of 3A:
 
@@ -45,11 +45,11 @@ One solution to help reduce chatter is introducing a switching penalty, that can
 
 Adding the penalty has successfully reduced the number of switching episodes, both during transients and steady-state, but this solution once again increases current rippling, now at 0.35A pk-pk, which causes undesirable torque jitter down the mechanical chain. 
 
-## 4. Computational performance:
+## 5. Computational performance:
 
 As mentionned before, increasing N exponentially increases the number of operations. To reduce the execution time, we can stop calculating the sequences that are already more expensive then the current best, since the cost can only increase. For my tested N=4, this didn't result in a performance increase, but the gains should be apparent on larger sequence sizes.
 
-## 5. Axis of improvements:
+## 6. Axis of improvements:
 
 First, increasing the switching frequency of both th PID and the MPC controllers could yield better current rippling performance, but this requires increasing the simulation frequency, which increases simulation times. 
 Moreover the chosen horizon for the MPC controller (4 steps) corresponds to a lookahead time of only 0.4ms << L/R = 10ms. Increasing the number of prediction steps N could help the controller make wiser choices and reduce the amount of switching. 
