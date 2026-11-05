@@ -52,6 +52,9 @@ As mentionned before, increasing N exponentially increases the number of operati
 ## 6. Axis of improvements:
 
 First, increasing the switching frequency of both th PID and the MPC controllers could yield better current rippling performance, but this requires increasing the simulation frequency, which increases simulation times. 
-Moreover the chosen horizon for the MPC controller (4 steps) corresponds to a lookahead time of only 0.4ms << L/R = 10ms. Increasing the number of prediction steps N could help the controller make wiser choices and reduce the amount of switching. 
-However, the number of calculations increases exponentially with N. This makes the current loop based approach unsuitable for larger lookahead times, or real time execution. 
+
+Moreover the chosen horizon for the MPC controller (4 steps) corresponds to a lookahead time of only 0.4ms << L/R = 10ms.
+Increasing the number of prediction steps N could help the controller make wiser choices and reduce the amount of switching. 
+However, the number of calculations increases exponentially with N. 
+This makes the current loop based predicting approach unsuitable if longer lookahead times are desired, or real time execution. 
 As a result, these operations should be parallelized in hardware or software to be able to run in real time.
