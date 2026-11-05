@@ -32,7 +32,7 @@ Now that both models include switching dynamics, we can compare the 2 controller
 
 ![Step response comparison](./images/step_response_compare.png) 
 
-We can see that the current tracking performance, as well as the response time of the MPC controller is superior to the PID. Of course, the PID could be tuned more agressivally to increase settle time, but this would introduce overshoot or instability, while the MPC natively provides the optimal current response speed (ie limited by motor resistance).
+We can see that the current tracking performance, as well as the response time of the MPC controller is superior to the PID. Of course, the PID could be tuned more agressivally to decrease the settle time, but this could introduce overshoot or instability, while the MPC natively provides the optimal current response speed (ie limited by motor resistance).
 
 However, the trade-offs for this better transient performance are : higher current rippling compared to PID (0.2A vs 0.1A pk-pk ), which increases torque ripple as well as higher chatter at steady state, which increases switching losses and wear. 
 
