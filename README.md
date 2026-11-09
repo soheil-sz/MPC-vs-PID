@@ -15,11 +15,11 @@ The speed lag is due to conservative pole placement/bandwidth, and can be improv
 
 ## 3. Cascaded FCS-MPC 
 
-Next, the FCS-MPC controller was built. The controller switches the output between 2 discrete voltages: {-Vdc, Vdc}, with the aim of minimising the motor current error. 
+Next, the FCS-MPC controller was built. The controller switches the output between 2 discrete voltages: {-Vdc, Vdc}, with the aim of minimising the motor current error. The current setpoint is given by the same PID corrector as the cascaded PID. 
 
 ![FCS-MPC response](./images/mpc_response_no_penalty.png)
 
-THe FCS MPC controller successfully controls the motor current by modulating the voltage, which allows the motor to reach the desired speed. 
+The FCS MPC controller successfully controls the motor current by modulating the voltage, which allows the motor to reach the desired speed. 
 However, we can see significant current ripple that wasn't present for the PID cascade. This is because the MPC controller is switching a H-Bridge, while the PID cascade is feeding the motor an ideal analog voltage source.
 
 ## 4. Switching PID
